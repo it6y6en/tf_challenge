@@ -1,5 +1,9 @@
+data "aws_ssm_parameter" "al2023" {
+  name = "/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64"
+}
+
 resource "aws_instance" "this" {
-  ami                         = "resolve:ssm:/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64"
+  ami                         = data.aws_ssm_parameter.al2023.value
   instance_type               = "t3.micro"
   subnet_id                   = var.subnet_id
   associate_public_ip_address = true
