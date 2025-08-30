@@ -3,6 +3,7 @@ resource "aws_instance" "this" {
   instance_type               = "t3.micro"
   subnet_id                   = var.subnet_id
   associate_public_ip_address = true
+  user_data                   = templatefile("${path.module}/user_data.tpl", {})
 
   tags = {
     Name = "ansys-interview-ec2"
